@@ -1,0 +1,63 @@
+<div  class="container mob-table">
+    <div class="headers">
+        <h2 class="table-title">Manage Movies</h2>
+        <button class="btn add" (click)="openForm()">Add Movies</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Movies</th>
+                <th>Id</th>
+                <th>Location</th>
+                <th>price(Rs)</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let x of movies">
+                <td>{{x.movies}}</td>
+                <td>{{x.id}}</td>
+                <td>{{x.location}}</td>
+                <td>{{x.price}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="openForm(x.id)">Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteMovies(x.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #err >
+    <h1 class="text-danger">ERROR FETCHING DATA</h1>
+</ng-template>
+
+<form #Postingdata="ngForm"  (ngSubmit)="saveMovie(Postingdata)">
+<div class="form-wrapper" *ngIf="showForm">
+    <div class="mobile-form">
+        <h2 class="test-center text-info">{{formHeader}}</h2>
+        <div class="group">
+            <label for="">Movies:</label>
+            <input type="text" class="form-control" [(ngModel)]="Movie" name="movies" required minlength="5">
+        </div>
+        <div class="group">
+            <label for="">Id:</label>
+            <input type="text" class="form-control" [(ngModel)]="id" name="id" required>
+        </div>
+        <div class="group">
+            <label for="">Location:</label>
+            <input type="text" class="form-control" [(ngModel)]="location" name="location" required>
+        </div>
+        <div class="group">
+            <label for="">Price:</label>
+            <input type="text" class="form-control" [(ngModel)]="price" name="price" required>
+        </div>
+        <div class="action">
+            <input class="btn btn-primary" type="submit" value ="Save Changes">
+            <button class="btn btn-danger cancel" (click)="closeForm()">Cancel</button>
+        </div>
+    </div>
+</div>
+</form>
